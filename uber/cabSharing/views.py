@@ -20,11 +20,12 @@ class RequestRide(generics.ListCreateAPIView):
         data = ast.literal_eval(json.dumps(request.data))
         request_serializer = self.serializer_class(data=data, context=context)
         if request_serializer.is_valid():
-            request_data = request_serializer.data
-            ride, error = RideService().book_ride(request_data)
+            ride, error = RideService().book_ride(request_serializer, context)
             if error is not None:
                 return Response({'detail': error.message}, status=error.status)
             return HttpResponse(ride, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'detail': request_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RideStatus(generics.RetrieveUpdateAPIView):
@@ -79,8 +80,10 @@ class Driver(generics.ListCreateAPIView):
         data = ast.literal_eval(json.dumps(request.data))
         driver_serializer = self.serializer_class(data=data, context=context)
         if driver_serializer.is_valid():
-            group_data = driver_serializer.data
-            return Response(group_data, status=status.HTTP_201_CREATED)
+            driver_serializer.save()
+            return Response(driver_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response({'detail': driver_serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def list(self, request, *args, **kwargs):
         queryset = models.Driver.objects.all()

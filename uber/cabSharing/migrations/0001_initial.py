@@ -57,6 +57,8 @@ class Migration(migrations.Migration):
                 ('start_address', models.CharField(max_length=100)),
                 ('end_address', models.CharField(max_length=100)),
                 ('status', models.CharField(default='ASSIGNED', max_length=50)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
                 ('distance', models.CharField(max_length=50, null=True)),
                 ('driver', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='driver_ride', to='cabSharing.Driver')),
             ],

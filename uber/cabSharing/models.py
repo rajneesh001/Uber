@@ -36,6 +36,8 @@ class Ride(models.Model):
     end_address = models.CharField(max_length=100)
     status = models.CharField(max_length=50, default='ASSIGNED')
     distance = models.CharField(max_length=50, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     rider = models.ForeignKey(Rider, related_name='rider_ride', on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, related_name='driver_ride', on_delete=models.CASCADE)
 
