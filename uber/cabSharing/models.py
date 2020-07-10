@@ -36,8 +36,8 @@ class Ride(models.Model):
     end_address = models.CharField(max_length=100)
     status = models.CharField(max_length=50, default="assigned")
     distance = models.CharField(max_length=50, null=True)
-    rider = models.ForeignKey(Rider, related_name='rider_ride', on_delete=models.CASCADE())
-    driver = models.ForeignKey(Driver, related_name='driver_ride', on_delete=models.CASCADE())
+    rider = models.ForeignKey(Rider, related_name='rider_ride', on_delete=models.CASCADE)
+    driver = models.ForeignKey(Driver, related_name='driver_ride', on_delete=models.CASCADE)
 
 
 class Request(models.Model):
@@ -47,7 +47,7 @@ class Request(models.Model):
     dest_long = models.CharField(max_length=50)
     start_address = models.CharField(max_length=100)
     end_address = models.CharField(max_length=100)
-    rider = models.ForeignKey(Rider, related_name='rider_request', on_delete=models.CASCADE())
+    rider = models.ForeignKey(Rider, related_name='rider_request', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=50, default='INITIATED')

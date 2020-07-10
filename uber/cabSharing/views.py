@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from rest_framework import generics, status
 from rest_framework.response import Response
 
-from uber.cabSharing.service.ride import RideService
+from .service.ride import RideService
 from . import models
 from . import serializers
 
