@@ -7,8 +7,8 @@ class Driver(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     image_url = models.URLField(null=True)
     phone = models.CharField(max_length=10, unique=True,
-                             error_messages={"unique": "this phone number already being taken"})
-    email = models.EmailField(max_length=100, unique=True, error_messages={"unique": "this email already being taken"})
+                             error_messages={'unique': 'this phone number already being taken'})
+    email = models.EmailField(max_length=100, unique=True, error_messages={'unique': 'this email already being taken'})
     cab_reg_num = models.CharField(max_length=100)
     lat = models.CharField(max_length=50, null=True)
     long = models.CharField(max_length=50, null=True)
@@ -22,8 +22,8 @@ class Rider(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     image_url = models.URLField(null=True)
     phone = models.CharField(max_length=10, unique=True,
-                             error_messages={"unique": "this phone number already being taken"})
-    email = models.EmailField(max_length=100, unique=True, error_messages={"unique": "this email already being taken"})
+                             error_messages={'unique': 'this phone number already being taken'})
+    email = models.EmailField(max_length=100, unique=True, error_messages={'unique': 'this email already being taken'})
 
 
 class Ride(models.Model):
@@ -34,7 +34,7 @@ class Ride(models.Model):
     fare = models.CharField(max_length=100, default=0)
     start_address = models.CharField(max_length=100)
     end_address = models.CharField(max_length=100)
-    status = models.CharField(max_length=50, default="assigned")
+    status = models.CharField(max_length=50, default='ASSIGNED')
     distance = models.CharField(max_length=50, null=True)
     rider = models.ForeignKey(Rider, related_name='rider_ride', on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, related_name='driver_ride', on_delete=models.CASCADE)
